@@ -6,3 +6,16 @@ class Article(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Comment(models.Model):
+    # on_delete=models.CASCADE -> 'Article이 삭제되면 Comment도 함께 삭제'
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)  # add 없는 경우 : 추가 됐을 때 뿐만 아니라 데이터에 수정이 생긴 모든 경우 
+
+    class Meta:
+        ordering = ['-pk']
+
+    def __str__(self):
+        return self.content
