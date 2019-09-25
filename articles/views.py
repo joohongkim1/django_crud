@@ -13,8 +13,7 @@ def index(request):
 # Detail 페이지를 보여준다.
 def detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
-
-    comments = article.comment_set.all()
+    comments = article.comments.all()
     context = {
         'article': article,
         'comments': comments,
@@ -78,3 +77,13 @@ def comments_create(request, article_pk):
         comment.save()
 
     return redirect('articles:detail', article.pk)
+
+
+def comments_delete(request, article_pk, comment_pk):
+    # POST 요청으로 들어왔다면
+    if request.method == 'POST':
+    # comment_pk 에 해당하는 댓글 삭제
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        comment.delete()
+    # 댓글 삭제 후 detail 페이지로 이동
+    return redirect('articles:detail', article_pk)
