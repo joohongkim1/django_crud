@@ -3,9 +3,13 @@ from django.db import models
 # Create your models here.
 class Article(models.Model):
     title = models.CharField(max_length=20)
-    content = models.TextField()
+    content = models.TextField() # 문자열 빈 값 저장은 null이 아니라 '', blank만 사용
+    # blank: 데이터 유효성과 관련되어 있다.
+    # null: DB와 관련되어 있다.
+    image = models.ImageField(blank=True) 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
 class Comment(models.Model):
     # on_delete=models.CASCADE -> 'Article이 삭제되면 Comment도 함께 삭제'

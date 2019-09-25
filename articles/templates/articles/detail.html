@@ -6,6 +6,7 @@
   <h1>{{ article.title }}</h1>
   <p>작성일자: {{ article.created_at }}</p>
   <hr>
+  <img src="{{ article.image.url }}" alt="{{ article.image }}">
   <p>{{ article.content }}</p>
   <hr>
   <h4>Comments</h4>
