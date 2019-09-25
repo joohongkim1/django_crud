@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Job{% endblock title %}
 
 {% block body %}
 <h1>Job</h1>
-<form action="{% url 'jobs:past_job' %}" method="POST">
+<form action="{% url 'jobs:past_job' %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <input type="text" name="name" ><br>
+  <label for="image">이미지: </label>
+  <input type="file" name="image" id="image" accept="image/*"><br>
   <button type="submit">제출</button>
 
 </form>

@@ -14,12 +14,16 @@ def index(request):
 def past_job(request):
 
     name = request.POST.get('name')
+    image = request.FILES.get('image')
+
+
     if Job.objects.filter(name=name):
         job = Job.objects.get(name=name)
     else:
         job = Job()
         job.name = name
         job.past_job = fake.job()
+        job.profile_image = image
         job.save()
 
     url = URL + job.past_job
@@ -28,7 +32,7 @@ def past_job(request):
 
     context = {
         'job':job,
-        'data':data
+        'data':data,
         }
         
     return render(request, 'jobs/past_job.html', context)
